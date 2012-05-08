@@ -112,4 +112,4 @@ publish:
 	uglifyjs -nc ../../app/js/bootstrap/bootstrap.js > ../../app/js/bootstrap/bootstrap.min.tmp.js
 	echo "/*!\n* Bootstrap.js by @fat & @mdo\n* Copyright 2012 Twitter, Inc.\n* http://www.apache.org/licenses/LICENSE-2.0.txt\n*/" > ../../app/js/bootstrap/copyright.js
 	cat ../../app/js/bootstrap/copyright.js ../../app/js/bootstrap/bootstrap.min.tmp.js > ../../app/js/bootstrap/bootstrap.min.js
-	rm ../../app/js/bootstrap/copyright.js ../../app/js/bootstrap/bootstrap.min.tmp.j
+	rm ../../app/js/bootstrap/copyright.js ../../app/js/bootstrap/bootstrap.min.tmp.js
