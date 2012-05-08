@@ -92,3 +92,24 @@ watch:
 
 
 .PHONY: docs watch gh-pages
+
+#
+# PUBLISH BOOTSTRAP ASSETS IN APP DIRS
+# recess & uglifyjs are required
+#
+
+publish:
+	mkdir -p ../../app/img/bootstrap
+	mkdir -p ../../app/css/bootstrap
+	mkdir -p ../../app/js/bootstrap
+	cp img/* ../../app/img/bootstrap
+	
+	recess --compile ${BOOTSTRAP_LESS} > ../../app/css/bootstrap/bootstrap.css
+	recess --compress ${BOOTSTRAP_LESS} > ../../app/css/bootstrap/bootstrap.min.css
+	recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > ../../app/css/bootstrap/bootstrap-responsive.css
+	recess --compress ${BOOTSTRAP_RESPONSIVE_LESS} > ../../app/css/bootstrap/bootstrap-responsive.min.css
+	cat js/bootstrap-transition.js js/bootstrap-alert.js js/bootstrap-button.js js/bootstrap-carousel.js js/bootstrap-collapse.js js/bootstrap-dropdown.js js/bootstrap-modal.js js/bootstrap-tooltip.js js/bootstrap-popover.js js/bootstrap-scrollspy.js js/bootstrap-tab.js js/bootstrap-typeahead.js > ../../app/js/bootstrap/bootstrap.js
+	uglifyjs -nc bootstrap/js/bootstrap.js > ../../app/js/bootstrap/bootstrap.min.tmp.js
+	echo "/*!\n* Bootstrap.js by @fat & @mdo\n* Copyright 2012 Twitter, Inc.\n* http://www.apache.org/licenses/LICENSE-2.0.txt\n*/" > ../../app/js/bootstrap/copyright.js
+	cat ../../app/js/bootstrap/copyright.js ../../app/js/bootstrap/bootstrap.min.tmp.js > ../../app/js/bootstrap/bootstrap.min.js
+	rm ../../app/js/bootstrap/copyright.js ../../app/js/bootstrap/bootstrap.min.tmp.j
